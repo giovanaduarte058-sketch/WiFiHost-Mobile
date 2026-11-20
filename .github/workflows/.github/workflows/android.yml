@@ -1,9 +1,11 @@
+
 name: Build Android APK
 
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   build:
@@ -27,14 +29,25 @@ jobs:
       - name: Configurar Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Instalar Android workload
+      - name: Instalar workload Android
         run: dotnet workload install android
 
-      - name: Compilar APK
-        run: dotnet publish WiFiHost-Mobile.csproj -f net10.0-android -c Release
+      - name: Encontrar e compilar projeto
+        shell: bash
+        run: |
+          PROJECT=$(find . -name 'WiFiHost-Mobile.csproj' -print -quit)
+
+          if [ -z "$PROJECT" ]; then
+            echo "ERRO: WiFiHost-Mobile.csproj não encontrado!"
+            exit 1
+          fi
+
+          echo "Projeto encontrado: $PROJECT"
+          dotnet publish "$PROJECT" -f net10.0-android -c Release
 
       - name: Salvar APK
         uses: actions/upload-artifact@v4
         with:
           name: WiFiHost-Mobile-APK
           path: '**/bin/Release/net10.0-android/publish/*.apk'
+          if-no-files-found: error
