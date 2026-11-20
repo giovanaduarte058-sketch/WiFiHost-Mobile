@@ -1,0 +1,16 @@
+COMO GERAR O APK PELO GITHUB ACTIONS
+
+1. Entre em https://github.com e crie um repositório novo.
+2. Dê um nome, por exemplo: WiFiHost-Mobile. Pode deixar como Private ou Public.
+3. Na página do repositório, clique em "Add file" > "Upload files".
+4. Extraia este ZIP no computador e envie TODO o conteúdo da pasta, incluindo a pasta oculta .github.
+   IMPORTANTE: o arquivo .github/workflows/android.yml precisa ficar exatamente nesse caminho no repositório.
+5. Clique em "Commit changes".
+6. Abra a aba "Actions" do repositório.
+7. Selecione "Build Android APK" e clique em "Run workflow" (se o build não iniciar automaticamente após o commit).
+8. Aguarde o processo ficar verde e abrir o resultado concluído.
+9. No final da página do processo, em "Artifacts", baixe "WiFiHost-Mobile-APK".
+10. Extraia o ZIP baixado para encontrar o APK.
+
+O GitHub Actions compila o projeto na nuvem; não precisa instalar Android SDK no PC.
+O primeiro build pode demorar alguns minutos.
