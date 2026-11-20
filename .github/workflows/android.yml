@@ -28,6 +28,8 @@ jobs:
 
       - name: Configurar Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
 
       - name: Instalar workload Android
         run: dotnet workload install android
